@@ -13,30 +13,24 @@ import {
   containsString,
 } from 'hamjest';
 
-import { AppComponent } from './app.component';
+import { MenuComponent } from './menu.component';
 
-@Component({
-  selector: 'hb-menu',
-  template: '<div>MENU</div>',
-})
-export class TestMenuComponent {}
-
-describe('AppComponent', () => {
+describe('MenuComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
-        TestMenuComponent,
-      ],
-    }).compileComponents();
+        MenuComponent,
+      ]
+    })
+    .compileComponents();
   }));
 
-  let fixture: ComponentFixture<AppComponent>;
-  let cut: AppComponent;
+  let fixture: ComponentFixture<MenuComponent>;
+  let cut: MenuComponent;
   let element: any;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(MenuComponent);
     cut = fixture.debugElement.componentInstance;
     element = fixture.debugElement.nativeElement;
     fixture.detectChanges();
@@ -47,8 +41,13 @@ describe('AppComponent', () => {
     assertThat(cut, is(truthy()));
   });
 
-  it('should render the menu', () => {
+  it('should render accounts', () => {
 
-    assertThat(element, hasProperty('innerText', containsString('MENU')));
+    assertThat(element, hasProperty('innerText', containsString('Accounts')));
+  });
+
+  it('should render budgets', () => {
+
+    assertThat(element, hasProperty('innerText', containsString('Budgets')));
   });
 });
