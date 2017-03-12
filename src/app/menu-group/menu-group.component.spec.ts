@@ -59,7 +59,6 @@ describe('Component: MenuGroupComponent', () => {
 
   beforeEach(() => {
     cut.title = 'Bazinga!';
-    cut.createItemLabel = 'More bazinga!';
     fixture.detectChanges();
   });
 
@@ -68,37 +67,43 @@ describe('Component: MenuGroupComponent', () => {
     assertThat(cut, is(truthy()));
   });
 
+  it('should render the group title', () => {
+
+    assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
+  });
+
   describe('with "compact" equal to true', () => {
     beforeEach(() => {
       cut.compact = true;
       fixture.detectChanges();
     });
 
-    it('should NOT render any menu entry', () => {
-
-      assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(0));
-    });
-
-    it('should render only the group title', () => {
-
-      assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
-    });
-
-    it('should NOT render the "createItem" label', () => {
-
-      assertThat(element, hasProperty('innerText', not(containsString('More bazinga!'))));
-    });
-
-    describe('and after click on the group title', () => {
+    describe('and with "createItemLabel"', () => {
       beforeEach(() => {
-        element.querySelector('.group__title').dispatchEvent(new MouseEvent('click'));
+        cut.createItemLabel = 'More bazinga!';
         fixture.detectChanges();
       });
 
-      it('should render render the "createItem" label as well', () => {
-          const valueList = [];
+      it('should NOT render any menu entry', () => {
 
-          assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
+        assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(0));
+      });
+
+      it('should NOT render the "createItemLabel"', () => {
+
+        assertThat(element, hasProperty('innerText', not(containsString('More bazinga!'))));
+      });
+
+      describe('and after click on the group title', () => {
+        beforeEach(() => {
+          element.querySelector('.group__title').dispatchEvent(new MouseEvent('click'));
+          fixture.detectChanges();
+        });
+
+        it('should render the "createItemLabel" as well', () => {
+
+            assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
+        });
       });
     });
   });
@@ -110,14 +115,21 @@ describe('Component: MenuGroupComponent', () => {
     });
 
     describe('and with empty "itemList"', () => {
-      it('should render the group title', () => {
-
-        assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
+      beforeEach(() => {
+        cut.itemList = [];
+        fixture.detectChanges();
       });
 
-      it('should render the "createItem" label', () => {
+      describe('should render the "createItemLabel"', () => {
+        beforeEach(() => {
+          cut.createItemLabel = 'More bazinga!';
+          fixture.detectChanges();
+        });
 
-        assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
+        it('should render the "createItemLabel"', () => {
+
+          assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
+        });
       });
     });
 
@@ -133,11 +145,6 @@ describe('Component: MenuGroupComponent', () => {
       it('should render 4 menu entries', () => {
 
         assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(4));
-      });
-
-      it('should render the group title', () => {
-
-        assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
       });
 
       describe('and after click on the group title', () => {
@@ -174,20 +181,27 @@ describe('Component: MenuGroupComponent', () => {
         });
       });
 
-      it('should render the "createItem" label', () => {
+      describe('and with "createItemLabel"', () => {
+        beforeEach(() => {
+          cut.createItemLabel = 'More bazinga!';
+          fixture.detectChanges();
+        });
 
-        assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
-      });
+        it('should render the "createItemLabel"', () => {
 
-      describe('and after click on "createItem" entry', () => {
+          assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
+        });
 
-        it('should emit an event on "createItem"', () => {
-            let callCount = 0;
+        describe('and after click on "createItem" entry', () => {
 
-            cut.createItem.subscribe((click) => callCount++);
-            element.querySelector('.group__footer').dispatchEvent(new MouseEvent('click'));
+          it('should emit an event on "createItem"', () => {
+              let callCount = 0;
 
-            assertThat(callCount, equalTo(1));
+              cut.createItem.subscribe((click) => callCount++);
+              element.querySelector('.group__footer').dispatchEvent(new MouseEvent('click'));
+
+              assertThat(callCount, equalTo(1));
+          });
         });
       });
     });

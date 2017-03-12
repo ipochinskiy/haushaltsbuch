@@ -6,6 +6,6 @@
                    [label]="item.name"
                    (click)="selectItem.emit(item.id)">
     </hb-menu-entry>
-    <div class="group__footer" (click)="createItem.emit($event)">{{createItemLabel}}</div>
+    <div class="group__footer" *ngIf="!!createItemLabel" (click)="createItem.emit($event)">{{createItemLabel}}</div>
   </div>
 </div>
