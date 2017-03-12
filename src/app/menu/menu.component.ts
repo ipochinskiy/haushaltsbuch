@@ -21,4 +21,6 @@ export class MenuComponent {
   createBudget() {}
   selectAccount() {}
   selectBudget() {}
+  selectPlanned() {}
+  selectReports() {}
 }

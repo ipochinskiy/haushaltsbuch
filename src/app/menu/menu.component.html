@@ -4,7 +4,7 @@
                  [itemList]="accountList"
                  [createItemLabel]="'Add new account'"
                  (createItem)="createAccount()"
-                 (selectItem)="selectAccount()">
+                 (selectItem)="selectAccount($event)">
   </hb-menu-group>
   <hr>
   <hb-menu-group [icon]="'balance-scale'"
@@ -12,6 +12,16 @@
                  [itemList]="budgetList"
                  [createItemLabel]="'Add new budget'"
                  (createItem)="createBudget()"
-                 (selectItem)="selectBudget()">
+                 (selectItem)="selectBudget($event)">
+  </hb-menu-group>
+  <hr>
+  <hb-menu-group [icon]="'calendar-check'"
+                 [title]="'Planned'"
+                 (click)="selectPlanned()">
+  </hb-menu-group>
+  <hr>
+  <hb-menu-group [icon]="'area-chart'"
+                 [title]="'Reports'"
+                 (title)="selectReports()">
   </hb-menu-group>
 </div>

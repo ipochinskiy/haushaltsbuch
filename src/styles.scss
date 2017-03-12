@@ -28,6 +28,18 @@
   @include icon('\f24e');
 }
 
+.icon--area-chart:before {
+  @include icon('\f24e');
+}
+
+.icon--area-chart:before {
+  @include icon('\f1fe');
+}
+
+.icon--calendar-check:before {
+  @include icon('\f274');
+}
+
 body {
   margin: 0;
 }
