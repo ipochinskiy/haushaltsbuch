@@ -29,6 +29,7 @@
   "devDependencies": {
     "@angular/cli": "1.0.0-rc.1",
     "@angular/compiler-cli": "^2.4.0",
+    "@types/hamjest": "git://github.com/mafo5/typed-hamjest.git#v2.1.0",
     "@types/jasmine": "2.5.38",
     "@types/lodash": "^4.14.54",
     "@types/node": "~6.0.60",
