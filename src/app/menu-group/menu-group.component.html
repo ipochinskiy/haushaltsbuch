@@ -1,8 +1,11 @@
-<hb-menu-entry [label]="title" [icon]="icon" (click)="toggleGroup()"></hb-menu-entry>
-<div *ngIf="!compact">
-  <hb-menu-entry *ngFor="let item of itemList"
-                 [label]="item.name"
-                 (click)="selectItem.emit(item.id)">
-  </hb-menu-entry>
-  <hb-menu-entry class="more" [label]="createItemLabel" (click)="createItem.emit($event)"></hb-menu-entry>
+<div class="group">
+  <div class="group__title" [ngClass]="'icon--' + icon" (click)="toggleGroup()">{{title}}</div>
+  <div *ngIf="!compact">
+    <hb-menu-entry *ngFor="let item of itemList"
+                   [active]="item.active"
+                   [label]="item.name"
+                   (click)="selectItem.emit(item.id)">
+    </hb-menu-entry>
+    <div class="group__footer" (click)="createItem.emit($event)">{{createItemLabel}}</div>
+  </div>
 </div>

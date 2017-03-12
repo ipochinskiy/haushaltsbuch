@@ -30,6 +30,7 @@ import { MenuGroupComponent } from './menu-group.component';
   template: '<div>MENU ENTRY {{label}} {{icon}}</div>',
 })
 export class TestMenuEntryComponent {
+  @Input() active;
   @Input() icon;
   @Input() label;
 }
@@ -73,31 +74,31 @@ describe('Component: MenuGroupComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render only one menu entry', () => {
+    it('should NOT render any menu entry', () => {
 
-      assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(1));
+      assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(0));
     });
 
     it('should render only the group title', () => {
 
-      assertThat(element, hasProperty('innerText', containsString('MENU ENTRY Bazinga!')));
+      assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
     });
 
     it('should NOT render the "createItem" label', () => {
 
-      assertThat(element, hasProperty('innerText', not(containsString('MENU ENTRY More bazinga!'))));
+      assertThat(element, hasProperty('innerText', not(containsString('More bazinga!'))));
     });
 
     describe('and after click on the group title', () => {
       beforeEach(() => {
-        element.querySelectorAll('hb-menu-entry')[0].dispatchEvent(new MouseEvent('click'));
+        element.querySelector('.group__title').dispatchEvent(new MouseEvent('click'));
         fixture.detectChanges();
       });
 
       it('should render render the "createItem" label as well', () => {
           const valueList = [];
 
-          assertThat(element, hasProperty('innerText', containsString('MENU ENTRY More bazinga!')));
+          assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
       });
     });
   });
@@ -109,19 +110,14 @@ describe('Component: MenuGroupComponent', () => {
     });
 
     describe('and with empty "itemList"', () => {
-      it('should render two menu entries', () => {
-
-        assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(2));
-      });
-
       it('should render the group title', () => {
 
-        assertThat(element, hasProperty('innerText', containsString('MENU ENTRY Bazinga!')));
+        assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
       });
 
       it('should render the "createItem" label', () => {
 
-        assertThat(element, hasProperty('innerText', containsString('MENU ENTRY More bazinga!')));
+        assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
       });
     });
 
@@ -134,26 +130,25 @@ describe('Component: MenuGroupComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should render 6 menu entries', () => {
+      it('should render 4 menu entries', () => {
 
-        assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(6));
+        assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(4));
       });
 
       it('should render the group title', () => {
 
-        assertThat(element, hasProperty('innerText', containsString('MENU ENTRY Bazinga!')));
+        assertThat(element, hasProperty('innerText', containsString('Bazinga!')));
       });
 
       describe('and after click on the group title', () => {
         beforeEach(() => {
-          element.querySelectorAll('hb-menu-entry')[0].dispatchEvent(new MouseEvent('click'));
+          element.querySelector('.group__title').dispatchEvent(new MouseEvent('click'));
           fixture.detectChanges();
         });
 
-        it('should render only the group title', () => {
-            const valueList = [];
+        it('should not render any menu item', () => {
 
-            assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(1));
+            assertThat(element.querySelectorAll('hb-menu-entry'), hasSize(0));
         });
       });
 
@@ -173,15 +168,15 @@ describe('Component: MenuGroupComponent', () => {
             const valueList = [];
 
             cut.selectItem.subscribe((value) => valueList.push(value));
-            element.querySelectorAll('hb-menu-entry')[4].dispatchEvent(new MouseEvent('click'));
+            element.querySelectorAll('hb-menu-entry')[2].dispatchEvent(new MouseEvent('click'));
 
-            assertThat(valueList, hasItem(equalTo(4)));
+            assertThat(valueList, hasItem(equalTo(3)));
         });
       });
 
       it('should render the "createItem" label', () => {
 
-        assertThat(element, hasProperty('innerText', containsString('MENU ENTRY More bazinga!')));
+        assertThat(element, hasProperty('innerText', containsString('More bazinga!')));
       });
 
       describe('and after click on "createItem" entry', () => {
@@ -190,7 +185,7 @@ describe('Component: MenuGroupComponent', () => {
             let callCount = 0;
 
             cut.createItem.subscribe((click) => callCount++);
-            element.querySelector('hb-menu-entry:last-child').dispatchEvent(new MouseEvent('click'));
+            element.querySelector('.group__footer').dispatchEvent(new MouseEvent('click'));
 
             assertThat(callCount, equalTo(1));
         });
