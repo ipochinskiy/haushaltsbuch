@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  EventEmitter,
+  Component,
+  Input,
+  Output,
+} from '@angular/core';
 import {
   async,
   ComponentFixture,
@@ -15,11 +20,26 @@ import {
 
 import { MenuComponent } from './menu.component';
 
+@Component({
+  selector: 'hb-menu-group',
+  template: '<div>MENU GROUP {{title}}</div>',
+})
+export class TestMenuGroupComponent {
+  @Input() createItemLabel: string;
+  @Input() icon: string;
+  @Input() itemList: string;
+  @Input() title: string;
+
+  @Output() createItem: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectItem: EventEmitter<any> = new EventEmitter<any>();
+}
+
 describe('MenuComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         MenuComponent,
+        TestMenuGroupComponent,
       ]
     })
     .compileComponents();
@@ -43,11 +63,11 @@ describe('MenuComponent', () => {
 
   it('should render accounts', () => {
 
-    assertThat(element, hasProperty('innerText', containsString('Accounts')));
+    assertThat(element, hasProperty('innerText', containsString('MENU GROUP Accounts')));
   });
 
   it('should render budgets', () => {
 
-    assertThat(element, hasProperty('innerText', containsString('Budgets')));
+    assertThat(element, hasProperty('innerText', containsString('MENU GROUP Budgets')));
   });
 });

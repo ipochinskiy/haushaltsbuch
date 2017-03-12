@@ -1,25 +1,10 @@
 .menu {
   height: 100vh;
-  width: 15%;
+  width: 20%;
   background-color: #efeff5;
   font-family: 'Open Sans', Arial;
-
-  &__category {
-    &__title {
-      font-size: 20px;
-      padding: 10px 50px;
-    }
-
-    &__title:before {
-      position: absolute;
-      left: 15px;
-    }
-
-    &__item {
-      font-size: 15px;
-      padding: 5px 50px;
-    }
-  }
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 hr {

@@ -1,13 +1,17 @@
 <div class="menu">
-  <div class="menu__category">
-    <div class="menu__category__title icon--money">Accounts</div>
-    <div class="menu__category__item">Account 1</div>
-    <div class="menu__category__item">Account 2</div>
-  </div>
+  <hb-menu-group [icon]="'money'"
+                 [title]="'Accounts'"
+                 [itemList]="accountList"
+                 [createItemLabel]="'Add new account'"
+                 (createItem)="createAccount()"
+                 (selectItem)="selectAccount()">
+  </hb-menu-group>
   <hr>
-  <div class="menu__category">
-    <div class="menu__category__title icon--balance-scale">Budgets</div>
-    <div class="menu__category__item">Budget 1</div>
-    <div class="menu__category__item">Budget 2</div>
-  </div>
+  <hb-menu-group [icon]="'balance-scale'"
+                 [title]="'Budgets'"
+                 [itemList]="budgetList"
+                 [createItemLabel]="'Add new budget'"
+                 (createItem)="createBudget()"
+                 (selectItem)="selectBudget()">
+  </hb-menu-group>
 </div>
