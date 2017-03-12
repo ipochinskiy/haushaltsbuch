@@ -1,5 +1,8 @@
 <div class="group">
-  <div class="group__title" [ngClass]="'icon--' + icon" (click)="toggleGroup()">{{title}}</div>
+  <div class="group__title" (click)="toggleGroup()">
+    <i *ngIf="icon" [ngClass]="'icon--' + icon"></i>
+    <div>{{title}}</div>
+  </div>
   <div *ngIf="!compact">
     <hb-menu-entry *ngFor="let item of itemList"
                    [active]="item.active"
