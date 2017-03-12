@@ -52,6 +52,7 @@ describe('Component: MenuEntryComponent', () => {
 
   it('should render the icon', () => {
     cut.icon = 'bazinga';
+    cut.ngOnChanges();
     fixture.detectChanges();
 
     assertThat(element.querySelectorAll('.icon--bazinga'), hasSize(1));
@@ -61,8 +62,21 @@ describe('Component: MenuEntryComponent', () => {
     let callCount = 0;
 
     cut.click.subscribe((event) => callCount++);
-    element.children[0].click();
+    element.children[0].dispatchEvent(new MouseEvent('click'));
 
     assertThat(callCount, equalTo(1));
+  });
+
+  describe('with "active" property set', () => {
+    beforeEach(() => {
+      cut.active = true;
+      cut.ngOnChanges();
+      fixture.detectChanges();
+    });
+
+    it('should amend class list', () => {
+
+      assertThat(element.querySelectorAll('.entry--active'), hasSize(1));
+    });
   });
 });

@@ -1,0 +1,8 @@
+.entry {
+  display: block;
+  padding: 10px 50px;
+
+  &--active {
+    background-color: lightgray;
+  }
+}
