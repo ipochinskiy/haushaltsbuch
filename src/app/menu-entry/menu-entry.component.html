@@ -1,0 +1,6 @@
+<div class="menu__entry" (click)="click.emit($event)">
+    <div class="menu__entry__image">
+        <i [ngClass]="'icon--' + icon" *ngIf="icon"></i>
+    </div>
+    <div class="menu__entry__text">{{label}}</div>
+</div>
