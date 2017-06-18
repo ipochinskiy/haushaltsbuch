@@ -12,13 +12,14 @@ import {
 })
 export class MenuGroupComponent {
   @Input() createItemLabel: string;
-  @Input() compact = false;
   @Input() icon: string;
   @Input() itemList: any[] = [];
   @Input() title: string;
 
   @Output() createItem: EventEmitter<any> = new EventEmitter<any>();
   @Output() selectItem: EventEmitter<any> = new EventEmitter<any>();
+
+  compact = false;
 
   toggleGroup() {
     this.compact = !this.compact;
