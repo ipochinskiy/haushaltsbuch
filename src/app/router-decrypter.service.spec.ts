@@ -5,12 +5,15 @@ import {
   inject,
   ComponentFixture
 } from '@angular/core/testing';
+
 import {
   assertThat,
   is,
   truthy,
   hasProperties
 } from 'hamjest';
+
+import { Call } from './call';
 
 import { RouterDecrypterService } from './router-decrypter.service';
 
@@ -23,52 +26,62 @@ describe('Service: RouterDecrypterService', () => {
       }).compileComponents();
   }));
 
-  let decrypter: RouterDecrypterService;
+  let sut: RouterDecrypterService;
 
   beforeEach(inject([
     RouterDecrypterService,
   ], (
     _decrypter
   ) => {
-      decrypter = _decrypter;
+      sut = _decrypter;
   }));
 
   it('should create an instance', () => {
 
-      assertThat(decrypter, is(truthy()));
+      assertThat(sut, is(truthy()));
   });
 
   describe('cryptComponent()', () => {
     [
-        [ 'account', 'a' ],
-        [ 'budget', 'b' ],
-        [ 'plan', 'p' ],
-        [ 'report', 'r' ],
-        [ 'something', 'something' ],
+      [ 'account', 'a' ],
+      [ 'budget', 'b' ],
+      [ 'plan', 'p' ],
+      [ 'report', 'r' ],
+      [ 'something', 'something' ],
     ].forEach(([input, expected]: [string, string]) => {
-          it(`should return "${expected}" when called with "${input}"`, () => {
+      it(`should return "${expected}" when called with "${input}"`, () => {
 
-              const actual = decrypter.cryptComponent(input);
+        const actual = sut.cryptComponent(input);
 
-              assertThat(actual, is(expected));
-          });
+        assertThat(actual, is(expected));
       });
+    });
   });
 
-  describe('decryptComponent()', () => {
+  describe('decryptCall()', () => {
     [
-        [ 'a', 'account' ],
-        [ 'b', 'budget' ],
-        [ 'p', 'plan' ],
-        [ 'r', 'report' ],
-        [ 'something', 'something' ],
-    ].forEach(([input, expected]: [string, string]) => {
-          it(`should return "${expected}" when called with "${input}"`, () => {
+      [ '/',                            { component: 'account', params: [] } ],
+      [ '/a/1234',                      { component: 'account', params: [ '1234' ] } ],
+      [ '/a/1234?show=list',            { component: 'account', params: [ '1234', 'show=list' ] } ],
+      [ '/a/1234?show=list&command=add', { component: 'account', params: [ '1234', 'show=list', 'command=add' ] } ],
+      [ '/b/1234',                      { component: 'budget',  params: [ '1234' ] } ],
+      [ '/b/1234?show=list',            { component: 'budget',  params: [ '1234', 'show=list' ] } ],
+      [ '/b/1234?show=list&command=add', { component: 'budget',  params: [ '1234', 'show=list', 'command=add' ] } ],
+      [ '/p/1234',                      { component: 'plan',    params: [ '1234' ] } ],
+      [ '/p/1234?show=list',            { component: 'plan',    params: [ '1234', 'show=list' ] } ],
+      [ '/p/1234?show=list&command=add', { component: 'plan',    params: [ '1234', 'show=list', 'command=add' ] } ],
+      [ '/r/1234',                      { component: 'report',  params: [ '1234' ] } ],
+      [ '/r/1234?show=list',            { component: 'report',  params: [ '1234', 'show=list' ] } ],
+      [ '/r/1234?show=list&command=add', { component: 'report',  params: [ '1234', 'show=list', 'command=add' ] } ],
+    ].forEach(([ path, expected ]: [ string, Call ]) => {
+      describe(`when given path equal to "${path}"`, () => {
+        it(`should return "${JSON.stringify(expected)}"`, () => {
 
-              const actual = decrypter.decryptComponent(input);
+          const call: Call = sut.decryptCall(path);
 
-              assertThat(actual, is(expected));
-          });
+          assertThat(call, hasProperties(expected));
+        });
       });
+    });
   });
 });
