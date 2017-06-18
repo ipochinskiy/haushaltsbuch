@@ -15,18 +15,20 @@ import {
 
 import { AppComponent } from './app.component';
 
+/* tslint:disable */
 @Component({
-  selector: 'hb-menu',
-  template: '<div>MENU</div>',
+    selector: 'router-outlet',
+    template: 'ROUTER-OUTLET',
 })
-export class TestMenuComponent {}
+class DummyRouterOutletComponent {}
+/* tslint:enable */
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        TestMenuComponent,
+        DummyRouterOutletComponent,
       ],
     }).compileComponents();
   }));
@@ -45,10 +47,5 @@ describe('AppComponent', () => {
   it('should create the instance', () => {
 
     assertThat(cut, is(truthy()));
-  });
-
-  it('should render the menu', () => {
-
-    assertThat(element, hasProperty('innerText', containsString('MENU')));
   });
 });
