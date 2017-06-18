@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { Call } from './call';
 
 export const ActionTypes = {
-    SHOW_STATE:     '[App] Show State',
+    SHOW_STATE:     '[Location] Show State',
 };
 
 export class ShowStateAction implements Action {

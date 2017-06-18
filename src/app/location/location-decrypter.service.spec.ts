@@ -15,21 +15,21 @@ import {
 
 import { Call } from './call';
 
-import { RouterDecrypterService } from './router-decrypter.service';
+import { LocationDecrypterService } from './location-decrypter.service';
 
-describe('Service: RouterDecrypterService', () => {
+describe('Service: LocationDecrypterService', () => {
   beforeEach(async(() => {
       TestBed.configureTestingModule({
           providers: [
-              RouterDecrypterService,
+              LocationDecrypterService,
           ],
       }).compileComponents();
   }));
 
-  let sut: RouterDecrypterService;
+  let sut: LocationDecrypterService;
 
   beforeEach(inject([
-    RouterDecrypterService,
+    LocationDecrypterService,
   ], (
     _decrypter
   ) => {

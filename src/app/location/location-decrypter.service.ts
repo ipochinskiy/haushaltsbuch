@@ -18,7 +18,7 @@ const COMPONENT_LIST_REVERSE = {
 const DEFAULT_COMPONENT = 'account';
 
 @Injectable()
-export class RouterDecrypterService {
+export class LocationDecrypterService {
   cryptComponent(long: string): string {
     return COMPONENT_LIST_REVERSE[long] || long;
   }

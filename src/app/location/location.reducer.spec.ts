@@ -17,18 +17,18 @@ import {
     defined,
 } from 'hamjest';
 
-import * as fromApp from './app.actions';
+import * as fromLocation from './location.actions';
 import {
     reducer,
     State,
-} from './app.reducer';
+} from './location.reducer';
 
 describe('Reducer: Resources', () => {
   describe('for ShowStateAction', () => {
     it('should add resources to store', () => {
       const initialState: State = undefined;
 
-      const state: State = reducer(initialState, new fromApp.ShowStateAction({
+      const state: State = reducer(initialState, new fromLocation.ShowStateAction({
         component: 'account',
         params: [ '1234', 'show=list' ],
       }));

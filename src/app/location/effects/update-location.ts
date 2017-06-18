@@ -17,11 +17,11 @@ import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 import * as fromRouter from '@ngrx/router-store';
 
-import * as fromApp from '../app.actions';
+import * as fromLocation from '../location.actions';
 
 import { Call } from '../call';
 
-import { RouterDecrypterService } from '../router-decrypter.service';
+import { LocationDecrypterService } from '../location-decrypter.service';
 
 @Injectable()
 export class UpdateLocationEffects {
@@ -32,12 +32,12 @@ export class UpdateLocationEffects {
     .map(toPayload)
     .map((payload: { path: string }) => {
       const call = this.decrypter.decryptCall(payload.path);
-      return new fromApp.ShowStateAction(call);
+      return new fromLocation.ShowStateAction(call);
     });
 
   constructor(
     private actions$: Actions,
-    private decrypter: RouterDecrypterService
+    private decrypter: LocationDecrypterService
   ) {
   }
 }

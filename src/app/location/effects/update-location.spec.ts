@@ -34,10 +34,10 @@ import {
   wasCalled,
   MockService,
   MockServiceProvider,
-} from '../test';
+} from '../../test';
 
-import { RouterDecrypterService } from '../router-decrypter.service';
-import * as fromApp from '../app.actions';
+import { LocationDecrypterService } from '../location-decrypter.service';
+import * as fromLocation from '../location.actions';
 
 import { UpdateLocationEffects } from './update-location';
 
@@ -49,7 +49,7 @@ describe('Effects: UpdateLocationEffects', () => {
       ],
       providers: [
         UpdateLocationEffects,
-        { provide: RouterDecrypterService, useValue: MockServiceProvider.with('decryptCall') },
+        { provide: LocationDecrypterService, useValue: MockServiceProvider.with('decryptCall') },
       ],
     }).compileComponents();
   }));
@@ -61,7 +61,7 @@ describe('Effects: UpdateLocationEffects', () => {
   beforeEach(inject([
     EffectsRunner,
     UpdateLocationEffects,
-    RouterDecrypterService,
+    LocationDecrypterService,
   ], (
     _runner,
     locationChangeEffects,
@@ -97,7 +97,7 @@ describe('Effects: UpdateLocationEffects', () => {
       eut.change$.subscribe(value => resultList.push(value));
 
       assertThat(resultList, contains(allOf(
-        instanceOf(fromApp.ShowStateAction),
+        instanceOf(fromLocation.ShowStateAction),
         hasProperty('payload', hasProperty(
           'enabledComponent',
           hasProperties({

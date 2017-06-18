@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 
 import { Call } from './call';
 
-import * as actions from './app.actions';
+import * as actions from './location.actions';
 
 export interface State {
   enabledComponent: Call,
