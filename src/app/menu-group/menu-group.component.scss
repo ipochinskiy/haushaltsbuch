@@ -6,12 +6,6 @@
     position: relative;
     font-size: 20px;
 
-    & i {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-    }
-
     & div {
       padding: 10px 50px;
     }
@@ -19,6 +13,19 @@
     &:before {
       position: absolute;
       left: 15px;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 10px;
+
+    &--left {
+      left: 10px;
+    }
+
+    &--right {
+      right: 10px;
     }
   }
 

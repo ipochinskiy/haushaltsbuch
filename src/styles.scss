@@ -40,6 +40,14 @@
   @include icon('\f274');
 }
 
+.icon--chevron-up:before {
+  @include icon('\f077');
+}
+
+.icon--chevron-down:before {
+  @include icon('\f078');
+}
+
 body {
   margin: 0;
 }
