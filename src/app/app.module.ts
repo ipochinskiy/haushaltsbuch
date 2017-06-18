@@ -8,6 +8,8 @@ import { MenuComponent } from './menu/menu.component';
 import { MenuEntryComponent } from './menu-entry/menu-entry.component';
 import { MenuGroupComponent } from './menu-group/menu-group.component';
 
+import { RouterDecrypterService } from './router-decrypter.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,9 @@ import { MenuGroupComponent } from './menu-group/menu-group.component';
     FormsModule,
     HttpModule,
   ],
-  providers: [],
+  providers: [
+    RouterDecrypterService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
