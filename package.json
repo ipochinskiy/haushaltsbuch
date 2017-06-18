@@ -27,7 +27,7 @@
     "@ngrx/store": "^2.2.2",
     "@ngrx/store-devtools": "^3.2.4",
     "core-js": "^2.4.1",
-    "lodash": "^2.4.1",
+    "lodash": "^3.10.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.7.6"
   },
@@ -36,8 +36,9 @@
     "@angular/compiler-cli": "^2.4.0",
     "@types/hamjest": "git://github.com/mafo5/typed-hamjest.git#v2.1.0",
     "@types/jasmine": "2.5.38",
-    "@types/lodash": "^4.14.54",
+    "@types/lodash": "^4.14.66",
     "@types/node": "~6.0.60",
+    "@types/sinon": "^1.16.35",
     "codelyzer": "~2.0.0",
     "hamjest": "^2.13.0",
     "jasmine-core": "~2.5.2",
@@ -49,6 +50,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
+    "sinon": "^v2.0.0-pre.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.4.2",
     "typescript": "~2.0.0"
